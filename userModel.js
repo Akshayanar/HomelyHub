@@ -2,6 +2,8 @@
 
 import mongoose from "mongoose";
 import validator from "validator";
+import bcrypt from "bcryptjs";
+import crypto from "crypto";
 
 const userSchema = new mongoose.Schema(
     {
@@ -92,6 +94,49 @@ transform:function(doc,ret){
   //password logic 
   //hashing 
 
-  userSchema.pre("Save",async function(next){
+    userSchema.pre("save",async function(){
+        if (!this.isModified("password")) return next(); 
+     
+    this.password = await bcrypt.hash(this.password,12)
+    this.passwordConfirm = undefined;
     
-  }
+}) 
+
+// login check 
+
+userSchema.methods.correctPassword=async function(candidatePassword,userPassword){
+return await bcrypt.compare(candidatePassword,userPassword ) 
+
+}
+
+//
+userSchema.methods.changedPasswordAfter = function(JWTTimestamp){ 
+    if(this.passwordChangedAt){ 
+        const changeTimeStamp= parseInt(
+            this.passwordChangedAt.getTime()/1000,
+        );
+        return JWTTimestamp < changeTimeStamp;
+    }
+    return false ; 
+}
+// forgot password 
+userSchema.methods.createPasswordResetToken = function(){   
+    const resetToken=crypto.randomBytes(32).toString("hex");
+    this.passwordResetToken = crypto.createHash("sha256") 
+    .update(resetToken) 
+    .digest("hex"); 
+
+    this.passwordResetExpires = Date.now() +10*60*1000; 
+    return resetToken; 
+
+}
+
+const User =  mongoose.model("User", userSchema);
+//in mongodb:users
+export{User};  
+
+
+
+
+
+
