@@ -1,160 +1,133 @@
-# 🏠 HomelyHub - MERN STACK Internship Project
 
-Welcome to the official repository for **HomelyHub**! This project is being developed and updated daily during my month-long web development internship.
 
----
+Readme · MD
+🏠 HomelyHub — MERN Stack Internship Project
+Welcome to the official repository for HomelyHub, an AI-powered stay-booking web application built during a 4-week MERN Stack Internship (Batch B8) at WebStack Academy.
 
-## 📂 Project Structure
+🔗 Live App: homely-hub-beta.vercel.app
 
-```text
-Internship/
-├── HomelyHub/
-│   ├── backend/
-│   │   ├── src/
-│   │   │   ├── Models/
-│   │   │   │   └── userModel.js
-│   │   │   ├── utils/
-│   │   │   │   └── db.js
-│   │   │   └── index.js
-│   │   ├── .env
-│   │   ├── package.json
-│   │   └── node_modules/
+📖 About the Project
+HomelyHub is a full-stack stay-booking platform — a MERN-based alternative to Airbnb — where users can browse, filter, and book properties, hosts can list stays, and an integrated AI feature (powered by Groq) helps generate property descriptions and plan trips. The project was built end-to-end over the internship, from backend architecture and authentication to frontend UI, AI integration, and production deployment.
+
+🛠️ Technology Stack
+Layer	Technologies
+Frontend	React, Redux Toolkit, React Router DOM, Axios
+Backend	Node.js, Express.js (ES Modules syntax)
+Database	MongoDB, Mongoose
+Authentication & Security	JWT, Bcrypt, Validator
+Media Storage	Cloudinary (image & avatar uploads)
+AI Integration	Groq API (AI-assisted trip planning & descriptions)
+API Testing	Postman
+Deployment	Vercel (Frontend), Render (Backend), MongoDB Atlas (Database)
+📂 Project Structure
+HomelyHub/
+├── backend/
+│   ├── src/
+│   │   ├── Models/
+│   │   │   └── userModel.js
+│   │   ├── utils/
+│   │   │   └── db.js
+│   │   └── index.js
+│   ├── .env
+│   └── package.json
+├── public/
+├── src/
+├── index.html
+├── vite.config.js
 └── README.md
-```
+📊 Database Models
+👤 User Model (backend/src/Models/userModel.js)
+Field	Details
+name	String, trimmed, max 50 characters
+email	String, unique, lowercase, validated via validator.isEmail
+password	String, min 6 characters, excluded from default queries (select: false)
+passwordConfirm	String, validated to match password
+phoneNumber	String, unique, required
+role	String, enum ["user", "admin"], defaults to "user"
+avatar	Object — { url, public_id } (Cloudinary)
+Timestamps	Auto-generated createdAt / updatedAt
+🔌 API Endpoints (Plan)
+Method	Endpoint	Description	Status
+GET	/	Test endpoint to verify backend status	✅ Live
+POST	/api/v1/users/signup	Register a new user	✅ Live
+POST	/api/v1/users/login	Login user & issue JWT	✅ Live
+POST	/api/v1/users/forgotPassword	Request password reset email	⏳ Planned
+GET	/api/v1/properties	Fetch property listings	✅ Live
+POST	/api/v1/bookings	Create a new booking	✅ Live
+POST	/api/v1/ai/trip-plan	AI-generated trip plan (Groq)	✅ Live
+(Update statuses as endpoints are finalized.)
 
----
-
-## 🛠️ Technology Stack
-
-* **Backend:** Node.js & Express.js (ES Modules syntax)
-* **Database:** MongoDB & Mongoose
-* **Validation & Security:** Validator, Bcrypt
-* **API Testing:** Postman
-* **Authentication:** JWT
-* **Frontend:** React
-* **State Management:** Redux Toolkit
-
----
-
-## 📊 Database Models
-
-### 👤 User Model (`backend/src/Models/userModel.js`)
-
-The database schema handles user registration and role management with built-in validation:
-
-* **`name`**: String, trimmed, maximum 50 characters.
-* **`email`**: String, unique, lowercase, validated using `validator.isEmail`.
-* **`password`**: String, minimum length of 6 characters, excluded from default queries (`select: false`).
-* **`passwordConfirm`**: String, validated to match the input password.
-* **`phoneNumber`**: String, unique, required.
-* **`role`**: String, enum `["user", "admin"]`, defaults to `"user"`.
-* **`avatar`**: Object containing image `url` and Cloudinary `public_id`.
-* **Timestamps**: Automatic `createdAt` and `updatedAt` logs.
-
----
-
-## 🔌 API Endpoints Plan (MERN)
-
-| Method   | Endpoint                       | Description                            | Status    |
-| :------- | :----------------------------- | :------------------------------------- | :-------- |
-| **GET**  | `/`                            | Test endpoint to verify backend status | ✅ Live    |
-| **POST** | `/api/v1/users/signup`         | Register a new user                    | ⏳ Planned |
-| **POST** | `/api/v1/users/login`          | Login user & issue JWT/session         | ⏳ Planned |
-| **POST** | `/api/v1/users/forgotPassword` | Request password reset email           | ⏳ Planned |
-
----
-
-## 📅 30-Day Internship Log
-
-|     Day    | Date               | Tasks Completed                                                                                                 | Key Takeaways & Learned Skills                                                                               |   Status  |
-| :--------: | :----------------- | :-------------------------------------------------------------------------------------------------------------- | :----------------------------------------------------------------------------------------------------------- | :-------: |
-|  **Day 1** | August 19, 2026    | Initialized Node.js backend environment, configured Express, and established database connection with Mongoose. | Learned dotenv, CORS, Express JSON middleware, and basic backend setup.                                      |   ✅ Done  |
-|  **Day 2** | August 20, 2026    | Set up the development environment with VS Code, Node.js, MongoDB, Git, and GitHub.                             | Learned the basic tools required for MERN development and MongoDB Atlas setup.                               |   ✅ Done  |
-|  **Day 3** | August 21, 2026    | Set up the backend foundation and Express application for HomelyHub.                                            | Learned Express application structure and backend initialization.                                            |   ✅ Done  |
-|  **Day 4** | August 22, 2026    | Connected MongoDB, worked with middleware, and created the User Model.                                          | Learned how middleware works with Express and how Mongoose models are structured.                            |   ✅ Done  |
-|  **Day 5** | August 23, 2026    | Studied JWT, async/await, and HTTP methods.                                                                     | Learned asynchronous programming, JWT concepts, and the purpose of different HTTP methods.                   |   ✅ Done  |
-|  **Day 6** | August 24, 2026    | Tested APIs using Postman and studied request flow.                                                             | Learned how client requests move through the backend and how APIs can be tested using Postman.               |   ✅ Done  |
-|  **Day 7** | August 25, 2026    | Worked on the Property Model and Listing Backend.                                                               | Learned how property data can be modeled and handled in the backend.                                         |   ✅ Done  |
-|  **Day 8** | August 26, 2026    | Worked on route protection and the booking system.                                                              | Learned the basics of protecting backend resources and implementing booking-related functionality.           |   ✅ Done  |
-|  **Day 9** | August 27, 2026    | Implemented the flow from user signup to login.                                                                 | Learned the relationship between registration, authentication, and login functionality.                      |   ✅ Done  |
-| **Day 10** | August 28, 2026    | Started the React frontend and learned the basics of React.                                                     | Learned the basic concepts and workflow of building the frontend with React.                                 |   ✅ Done  |
-| **Day 11** | August 29, 2026    | Worked on the frontend structure and application flow.                                                          | Learned how the frontend is organized and how data/application flow works in a React application.            |   ✅ Done  |
-| **Day 12** | August 30, 2026    | Studied Redux Toolkit workflow for frontend state management.                                                   | Learned the basic Redux Toolkit workflow and how centralized state management fits into a React application. |   ✅ Done  |
-| **Day 13** | August 31, 2026    | *Update based on internship work.*                                                                              | *The provided LMS source does not specify the Day 13 internship task.*                                       | ⏳ Pending |
-| **Day 14** | September 1, 2026  | *Update based on internship work.*                                                                              | *The provided LMS source does not specify the Day 14 internship task.*                                       | ⏳ Pending |
-| **Day 15** | September 2, 2026  | *Update based on internship work.*                                                                              | *The provided LMS source does not specify the Day 15 internship task.*                                       | ⏳ Pending |
-| **Day 16** | September 3, 2026  | *Update based on internship work.*                                                                              | *The provided LMS source does not specify the Day 16 internship task.*                                       | ⏳ Pending |
-| **Day 17** | September 4, 2026  | *Update this...*                                                                                                | *Key takeaways...*                                                                                           | ⏳ Pending |
-| **Day 18** | September 5, 2026  | *Update this...*                                                                                                | *Key takeaways...*                                                                                           | ⏳ Pending |
-| **Day 19** | September 6, 2026  | *Update this...*                                                                                                | *Key takeaways...*                                                                                           | ⏳ Pending |
-| **Day 20** | September 7, 2026  | *Update this...*                                                                                                | *Key takeaways...*                                                                                           | ⏳ Pending |
-| **Day 21** | September 8, 2026  | *Update this...*                                                                                                | *Key takeaways...*                                                                                           | ⏳ Pending |
-| **Day 22** | September 9, 2026  | *Update this...*                                                                                                | *Key takeaways...*                                                                                           | ⏳ Pending |
-| **Day 23** | September 10, 2026 | *Update this...*                                                                                                | *Key takeaways...*                                                                                           | ⏳ Pending |
-| **Day 24** | September 11, 2026 | *Update this...*                                                                                                | *Key takeaways...*                                                                                           | ⏳ Pending |
-| **Day 25** | September 12, 2026 | *Update this...*                                                                                                | *Key takeaways...*                                                                                           | ⏳ Pending |
-| **Day 26** | September 13, 2026 | *Update this...*                                                                                                | *Key takeaways...*                                                                                           | ⏳ Pending |
-| **Day 27** | September 14, 2026 | *Update this...*                                                                                                | *Key takeaways...*                                                                                           | ⏳ Pending |
-| **Day 28** | September 15, 2026 | *Update this...*                                                                                                | *Key takeaways...*                                                                                           | ⏳ Pending |
-| **Day 29** | September 16, 2026 | *Update this...*                                                                                                | *Key takeaways...*                                                                                           | ⏳ Pending |
-| **Day 30** | September 17, 2026 | *Update this...*                                                                                                | *Key takeaways...*                                                                                           | ⏳ Pending |
-
----
-
-## ⚙️ How to Setup and Run
-
-### 1. Navigate to the Backend
-
-```bash
-cd HomelyHub/backend
-```
-
-### 2. Install Node Packages
-
-```bash
+📅 Internship Log — MERN Stack Internship (Batch B8)
+Day	Topic	What I Worked On
+Day 1	Kickoff Session	Program introduction and internship roadmap overview
+Day 2	Introduction & Setup	Installed VS Code, Node.js, MongoDB, Git & GitHub; set up the dev environment and MongoDB Atlas
+Day 3	Backend Foundation & Express Setup	Initialized the Node.js/Express backend structure for HomelyHub
+Day 4	MongoDB, Middleware, User Model	Connected MongoDB via Mongoose, learned middleware, built the User schema
+Day 5	JWT, Async/Await, HTTP Methods	Studied JWT authentication, asynchronous JS, and REST HTTP methods
+Day 6	API Testing in Postman	Learned request/response flow and tested endpoints in Postman
+Day 7	Property Model & Listing Backend	Built the Property schema and listing API endpoints
+Day 8	Route Protection & Booking System	Implemented protected routes and core booking logic
+Day 9	Signup → Login Flow	Connected registration and authentication end-to-end
+Day 10	React: Welcome to Frontend	Introduction to React and frontend project setup
+Day 11	Frontend Structure & App Flow	Structured the React app and component/data flow
+Day 12	Property Listing & Details Pages	Built listing/detail pages; learned Redux Toolkit workflow
+Day 13	Authentication UI & Redux	Built login/signup UI and wired it to Redux state
+Day 14	Feature Development	Continued core feature build-out (property & booking UI)
+Day 15	AI Feature — Trip Planner	Built the AI-powered Trip Planner feature using Groq
+Day 16	AI API Integration in MERN	Learned the backend AI integration workflow with Groq's API
+Day 17	Test Project	End-to-end testing and project presentation prep
+—	Deployment	Deployed frontend (Vercel) and backend (Render) to production
+—	Oral Presentation	Recorded and submitted the final project walkthrough video
+⚙️ How to Set Up and Run
+1. Clone the repository
+bash
+git clone https://github.com/Akshayanar/HomelyHub.git
+cd HomelyHub
+2. Backend Setup
+bash
+cd backend
 npm install
-```
+Create a .env file inside backend/:
 
-### 3. Environment Setup
-
-Configure a `.env` file inside `backend/`:
-
-```env
 PORT=5000
 MONGO_URI=your_mongodb_connection_string
-```
+JWT_SECRET=your_jwt_secret
+CLOUDINARY_CLOUD_NAME=your_cloud_name
+CLOUDINARY_API_KEY=your_api_key
+CLOUDINARY_API_SECRET=your_api_secret
+GROQ_API_KEY=your_groq_api_key
+Start the backend:
 
-### 4. Start Development Server
-
-```bash
+bash
 npm run dev
-```
+3. Frontend Setup
+bash
+cd ..
+npm install
+npm run dev
+📚 Internship Progress Summary
+Backend
 
----
+ Node.js & Express setup
+ MongoDB & Mongoose integration
+ Middleware & User Model
+ JWT authentication
+ API testing with Postman
+ Property Model & listing backend
+ Route protection & booking system
+ Signup → Login flow
+ Groq AI API integration
+Frontend
 
-## 📚 Internship Progress
+ React project setup
+ Application structure & data flow
+ Redux Toolkit state management
+ Authentication UI
+ Property listing & details pages
+ AI Trip Planner UI
+🎓 Acknowledgment
+This project was built as part of the MERN Stack Internship (Batch B8) at WebStack Academy. Special thanks to the mentors and team for their guidance throughout the program.
 
-### Backend Progress
+📬 Contact
+Author: [Akshaya Nar] GitHub: @Akshayanar Live Demo: homely-hub-beta.vercel.app
 
-* Node.js and Express setup
-* MongoDB and Mongoose integration
-* Middleware
-* User Model
-* JWT concepts
-* Async/await
-* HTTP methods
-* API testing with Postman
-* Property Model
-* Property listing backend
-* Route protection
-* Booking system
-* Signup and login flow
-
-### Frontend Progress
-
-* React introduction
-* React frontend setup
-* Frontend application flow
-* Redux Toolkit workflow
-
-The internship has progressed from **backend setup and database integration** toward **authentication, property/booking functionality, and React frontend development**.
