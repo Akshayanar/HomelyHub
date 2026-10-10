@@ -179,9 +179,8 @@ This project was built as part of the **MERN Stack Internship (Batch B8)** at **
  
 ## 📬 Contact
  
-**Author:** [Your Name]
+**Author:** [Akshaya Sachin Nar ]
 **GitHub:** [@Akshayanar](https://github.com/Akshayanar)
 **Live Demo:** [homely-hub-beta.vercel.app](https://homely-hub-beta.vercel.app)
  
 
-Claude finished the response
